@@ -87,6 +87,45 @@
   (when peep-dired-cleanup-eagerly
     (peep-dired-cleanup)))
 
+;; my functions
+
+(defun peep-dired-up-directory ()
+  "Peep first file when moving up directory."
+  (interactive)
+  (dired-up-directory)
+  (peep-dired-display-file-other-window)
+  (when peep-dired-cleanup-eagerly
+    (peep-dired-cleanup)))
+
+(defun peep-dired-find-file ()
+  "Peep first file when entering a subdirectory. If the selection is a file, just go to the peeped window."
+  (interactive)
+  (if (file-directory-p (dired-file-name-at-point))
+      (progn
+	(dired-find-file)
+	(peep-dired-display-file-other-window)
+	(when peep-dired-cleanup-eagerly
+    (peep-dired-cleanup)))
+    (other-window 1)))
+
+(defun peep-dired-prev-dirline ()
+  "Peep previous dirline."
+  (interactive)
+  (dired-prev-dirline 1)
+  (peep-dired-display-file-other-window)
+  (when peep-dired-cleanup-eagerly
+    (peep-dired-cleanup)))
+
+(defun peep-dired-next-dirline ()
+  "Peep next dirline."
+  (interactive)
+  (dired-next-dirline 1)
+  (peep-dired-display-file-other-window)
+  (when peep-dired-cleanup-eagerly
+    (peep-dired-cleanup)))
+
+;; my functions end here
+
 (defun peep-dired-kill-buffers-without-window ()
   "Will kill all peep buffers that are not displayed in any window"
   (interactive)
