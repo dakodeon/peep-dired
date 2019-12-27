@@ -1,3 +1,11 @@
+# NOTES
+
+- Peep dired is a very useful tool for my workflow, but I feel some features are missing, like a more integrated experience (e.g. functions like dired-prev/next-dir don't have an equivalent). I fixed some of these issues in my config, but it would be nice to be part of peep.
+- I have to work out what happens with cleanup-on-disable which stopped working and with cleanup-eagerly that never worked correctly.
+- A very useful feature would be the execution of some external script to be shown instead of the file for ignored extensions (e.g. thumbnails for video files --check image-dired, or mp3 tags for mp3 files etc)
+
+dakodeon 20191227
+
 # This project is looking for a mainater, please look [here](https://github.com/asok/peep-dired/issues/17)
 
 # Peep Dired
