@@ -97,17 +97,6 @@
   (when peep-dired-cleanup-eagerly
     (peep-dired-cleanup)))
 
-(defun peep-dired-find-file ()
-  "Peep first file when entering a subdirectory. If the selection is a file, just go to the peeped window."
-  (interactive)
-  (if (file-directory-p (dired-file-name-at-point))
-      (progn
-	(dired-find-file)
-	(peep-dired-display-file-other-window)
-	(when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
-    (other-window 1)))
-
 (defun peep-dired-prev-dirline ()
   "Peep previous dirline."
   (interactive)
@@ -123,6 +112,17 @@
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
     (peep-dired-cleanup)))
+
+(defun peep-dired-find-file ()
+  "Peep first file when entering a subdirectory. If the selection is a file, just go to the peeped window."
+  (interactive)
+  (if (file-directory-p (dired-file-name-at-point))
+      (progn
+	(dired-find-file)
+	(peep-dired-display-file-other-window)
+	(when peep-dired-cleanup-eagerly
+    (peep-dired-cleanup)))
+    (other-window 1)))
 
 ;; my functions end here
 
