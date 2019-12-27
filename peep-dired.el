@@ -131,7 +131,7 @@
   (interactive)
   (cl-loop for buffer in peep-dired-peeped-buffers do
            (unless (get-buffer-window buffer t)
-             (kill-buffer-if-not-modified buffer))))
+             (kill-buffer buffer))))
 
 (defun peep-dired-dir-buffer (entry-name)
   (with-current-buffer (or
@@ -167,14 +167,14 @@
   (scroll-other-window '-))
 
 (defun peep-dired-cleanup ()
-  (mapc 'kill-buffer-if-not-modified peep-dired-peeped-buffers)
+  (mapc 'kill-buffer peep-dired-peeped-buffers)
   (setq peep-dired-peeped-buffers ()))
 
 (defun peep-dired-disable ()
   (let ((current-point (point)))
     (jump-to-register :peep_dired_before)
     (when peep-dired-cleanup-on-disable
-      (mapc 'kill-buffer-if-not-modified peep-dired-peeped-buffers))
+      (mapc 'kill-buffer peep-dired-peeped-buffers))
     (setq peep-dired-peeped-buffers ())
     (goto-char current-point)))
 
