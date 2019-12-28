@@ -1,11 +1,11 @@
 # NOTES
 
-- Peep dired is a very useful tool for my workflow, but I feel some features are missing, like a more integrated experience (e.g. functions like dired-prev/next-dir don't have an equivalent). I fixed some of these issues in my config, but it would be nice to be part of peep.
-- I have to work out what happens with cleanup-on-disable which stopped working and with cleanup-eagerly that never worked correctly.
+- Peep dired is a very useful tool for my workflow, but I feel some features are missing, like a more integrated experience (e.g. functions like dired-prev/next-dir don't have an equivalent). I fixed some of these issues in my config, but it would be nice to be part of peep. --DONE
+- I have to work out what happens with cleanup-on-disable which stopped working and with cleanup-eagerly that never worked correctly. --DONE (needs testing)
 - A very useful feature would be the execution of some external script to be shown instead of the file for ignored extensions (e.g. thumbnails for video files --check image-dired, or mp3 tags for mp3 files etc)
 - Another thing: maybe quit peep dired when no peep buffer is visible
 - Navigation: if peep is enabled in a directory whose parent or child is already open and has not peep enabled, navigating to this directory should enable peep.
-- Minor detail: Change defaults for scrolling other window, since using SPC and DEL conflicts with Wdired
+- Minor detail: Change defaults for scrolling other window, since using SPC and DEL conflicts with Wdired.
 
 dakodeon 20191227
 

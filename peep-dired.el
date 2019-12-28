@@ -1,5 +1,7 @@
 ;;; peep-dired.el --- Peep at files in another window from dired buffers
 
+;; Edited by dakodeon, 2019
+
 ;; Copyright (C) 2014  Adam Sokolnicki
 
 ;; Author: Adam Sokolnicki <adam.sokolnicki@gmail.com>
@@ -23,24 +25,29 @@
 ;; This is a minor mode that can be enabled from a dired buffer.
 ;; Once enabled it will show the file from point in the other window.
 ;; Moving to the other file within the dired buffer with <down>/<up> or
-;; C-n/C-p will display different file.
-;; Hitting <SPC> will scroll the peeped file down, whereas
-;; C-<SPC> and <backspace> will scroll it up.
+;; C-n/C-p will display different file. > and < will show the next or
+;; previous dir, and hitting <RET> will visit the file or directory.
+;; Hitting C-S-v will scroll the peeped file down, whereas
+;; M-S-v will scroll it up.
 
 ;;; Code:
 
 (require 'cl-macs)
 
+;; I changed the defaults for scroll-page-up/down (was SPC/DEL) because they conflict with Wdired
 (defvar peep-dired-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "<down>")      'peep-dired-next-file)
     (define-key map (kbd "C-n")         'peep-dired-next-file)
     (define-key map (kbd "<up>")        'peep-dired-prev-file)
     (define-key map (kbd "C-p")         'peep-dired-prev-file)
-    (define-key map (kbd "<SPC>")       'peep-dired-scroll-page-down)
-    (define-key map (kbd "C-<SPC>")     'peep-dired-scroll-page-up)
-    (define-key map (kbd "<backspace>") 'peep-dired-scroll-page-up)
-    (define-key map (kbd "q")           'peep-dired)
+    (define-key map ">"                 'peep-dired-next-dirline)
+    (define-key map "<"                 'peep-dired-prev-dirline)
+    (define-key map "^"                 'peep-dired-up-directory)
+    (define-key map "<RET>"             'peep-dired-find-file)
+    (define-key map (kbd "C-S-v")       'peep-dired-scroll-page-down)
+    (define-key map (kbd "M-S-v")       'peep-dired-scroll-page-up)
+    (define-key map (kbd "q")           'peep-dired-disable)
     map)
   "Keymap for `peep-dired-mode'.")
 
