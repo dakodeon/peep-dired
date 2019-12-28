@@ -1,0 +1,107 @@
+* Peep Dired
+
+This is my take on peep-dired. I decided to fork the project and tweak it because I use it all the time and some features were missing or were half-done. I made some changes to the default behaviour until now and I plan to add some features later on inspired from ranger.
+
+** Changes from the original
+
+*** Extra "peepy-fied" functions
+
+The original project did not offer peep equivalents for all the movements you can do in dired, it had only peep-dired-prev/next-file.
+
+So I made the additions:
+
+- peep-dired-prev/next-dirline
+- peep-dired-up-directory
+- peep-dired-find-file
+
+*** Changed the default behaviour of peep-dired-cleanup and similar functions 
+
+All cleanup functions in peep-dired were using 'kill-buffer-if-not-modified'. This is not ideal, also there was some unidentified conflict with dired buffers (maybe they are considered modified?). Anyway, using 'kill-buffer' instead works just fine, if not better, as it allows the user to discard unwanted changes from modified buffers.
+
+Also, cleaning up eagerly was problematic. It used the 'peep-dired-cleanup' function, which sets the peeped dirs list to nil. This caused peep to break. I changed it to use the 'peep-dired-kill-buffers-without-window', which leaves only the current peeped buffer alive.
+
+Up til now, these changes seem to work fine.
+
+*** Changed the default keybindings for scrolling
+    
+The defaults were =<SPC>= and =<DEL>= for scrolling up and down. This is practical, but it conflicts with Wdired, as it overrides literal insertion of the =<SPC>= character and deletion. I set them to be =C-S-v= and =M-S-v= respectively.
+
+I also added keybindings for the aforementioned functions.
+
+* Original documentation
+
+This is a minor mode that can be enabled from a dired buffer.
+Once enabled it will show the file from point in the other window.
+Moving to the other file within the dired buffer with =down=/=up= or
+=C-n=/=C-p= will display different file.
+Hitting =SPC= will scroll the peeped file down, whereas
+=C-SPC= and =backspace= will scroll it up.
+
+[[https://github.com/asok/peep-dired/raw/master/screenshots/peep-dired-cast.gif][Screenshot]]
+
+** Installation
+
+   Once you have setup [http://melpa.milkbox.net/#/getting-started][Melpa] you can use `package-install` command to install Peep Dired. The package name is `peep-dired`.
+
+** Configuration
+
+*** Customizing
+
+When disabling the mode you can choose to kill the buffers that were opened while browsing the directories.
+
+#+begin_src emacs-lisp
+(setq peep-dired-cleanup-on-disable t)
+#+end_src
+
+Or you can choose to kill the buffer just after you move to another entry in the dired buffer.
+
+#+begin_src emacs-lisp
+(setq peep-dired-cleanup-eagerly t)
+#+end_src
+
+If you want the dired buffers that were peeped to have the mode enabled set it to true.
+
+#+begin_src emacs-lisp
+(setq peep-dired-enable-on-directories t)
+#+end_src
+
+*** Evil integration
+Adjust the state name depending on an evil state you open dired in:
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal peep-dired-mode-map (kbd "<SPC>") 'peep-dired-scroll-page-down
+                                             (kbd "C-<SPC>") 'peep-dired-scroll-page-up
+                                             (kbd "<backspace>") 'peep-dired-scroll-page-up
+                                             (kbd "j") 'peep-dired-next-file
+                                             (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+#+end_src
+
+** Ignoring Certain File Extensions
+
+You probably don't want to open certain files like videos when using Peep Dired. To ignore certain files when moving over them you can customize the following to your liking:
+
+#+begin_src emacs-lisp
+(setq peep-dired-ignored-extensions '("mkv" "iso" "mp4"))
+#+end_src
+
+
+** Alternatives
+
+   - [[https://github.com/ralesi/ranger.el][ranger.el]] emulates [[http://ranger.nongnu.org/][ranger]] in dired. It has the preview feature similar to Peep-Dired.
+
+** Contribution
+
+   Install [[https://github.com/rejeep/cask.el][cask]] if you haven't already, then:
+
+#+begin_src sh
+$ cd /path/to/peep-dired
+$ cask
+#+end_src
+
+
+Run all tests with:
+
+#+begin_src sh
+$ make test
+#+end_src

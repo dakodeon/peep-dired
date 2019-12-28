@@ -44,7 +44,7 @@
     (define-key map ">"                 'peep-dired-next-dirline)
     (define-key map "<"                 'peep-dired-prev-dirline)
     (define-key map "^"                 'peep-dired-up-directory)
-    (define-key map "<RET>"             'peep-dired-find-file)
+    (define-key map (kbd "<RET>")       'peep-dired-find-file)
     (define-key map (kbd "C-S-v")       'peep-dired-scroll-page-down)
     (define-key map (kbd "M-S-v")       'peep-dired-scroll-page-up)
     (define-key map (kbd "q")           'peep-dired-disable)
@@ -85,14 +85,14 @@
   (dired-next-line 1)
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
 
 (defun peep-dired-prev-file ()
   (interactive)
   (dired-previous-line 1)
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
 
 ;; my functions
 
@@ -102,7 +102,7 @@
   (dired-up-directory)
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
 
 (defun peep-dired-prev-dirline ()
   "Peep previous dirline."
@@ -110,7 +110,7 @@
   (dired-prev-dirline 1)
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
 
 (defun peep-dired-next-dirline ()
   "Peep next dirline."
@@ -118,7 +118,7 @@
   (dired-next-dirline 1)
   (peep-dired-display-file-other-window)
   (when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
 
 (defun peep-dired-find-file ()
   "Peep first file when entering a subdirectory. If the selection is a file, just go to the peeped window."
@@ -128,7 +128,7 @@
 	(dired-find-file)
 	(peep-dired-display-file-other-window)
 	(when peep-dired-cleanup-eagerly
-    (peep-dired-cleanup)))
+    (peep-dired-kill-buffers-without-window)))
     (other-window 1)))
 
 ;; my functions end here
