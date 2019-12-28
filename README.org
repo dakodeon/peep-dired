@@ -37,11 +37,11 @@ Moving to the other file within the dired buffer with =down=/=up= or
 Hitting =SPC= will scroll the peeped file down, whereas
 =C-SPC= and =backspace= will scroll it up.
 
-[[https://github.com/asok/peep-dired/raw/master/screenshots/peep-dired-cast.gif][Screenshot]]
+[[https://github.com/asok/peep-dired/raw/master/screenshots/peep-dired-cast.gif]]
 
 ** Installation
 
-   Once you have setup [http://melpa.milkbox.net/#/getting-started][Melpa] you can use `package-install` command to install Peep Dired. The package name is `peep-dired`.
+   Once you have setup [[http://melpa.milkbox.net/#/getting-started][Melpa]] you can use `package-install` command to install Peep Dired. The package name is `peep-dired`.
 
 ** Configuration
 
