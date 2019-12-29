@@ -44,12 +44,12 @@ A useful feature of ranger is the scope.sh script, which runs a script that prov
 
 Peep dired doesn't need this feature for most types, as most types can be opened through emacs directly, but it could be useful for ignored extensions.
 
-* Original documentation
+* Original documentation (from asok)
 
 This is a minor mode that can be enabled from a dired buffer.
 Once enabled it will show the file from point in the other window.
-Moving to the other file within the dired buffer with =down=/=up= or
-=C-n=/=C-p= will display different file.
+Moving to the other file within the dired buffer with =down/up= or
+=C-n/C-p= will display different file.
 Hitting =SPC= will scroll the peeped file down, whereas
 =C-SPC= and =backspace= will scroll it up.
 
