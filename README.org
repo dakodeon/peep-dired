@@ -28,6 +28,22 @@ The defaults were =<SPC>= and =<DEL>= for scrolling up and down. This is practic
 
 I also added keybindings for the aforementioned functions.
 
+** TODO Changes to be made [0/3]
+
+*** TODO Disable peep dired when no peep buffer is visible
+
+I haven't work out yet if this is really useful, but when I navigate around and I haven't got any visible peep dired, it gets confusing as to which buffer has peep eanble. As a result, the peeped buffers hang around until I find the peep buffer and disable it.
+
+*** TODO Enable peep dired when visiting already opened buffer through peep navigation
+
+Sometimes a parent or child directory of the one with peep enabled are already opened so, when visiting these directories, peep is not enabled as it should if 'peep-dired-enable-on-directories' is true.
+
+*** TODO External script for ignored extensions
+
+A useful feature of ranger is the scope.sh script, which runs a script that provides the output for the other window. As an example, for mp3 files, I had a script that shows ID3 information, or, for video files, a script showing a thumbnail.
+
+Peep dired doesn't need this feature for most types, as most types can be opened through emacs directly, but it could be useful for ignored extensions.
+
 * Original documentation
 
 This is a minor mode that can be enabled from a dired buffer.
